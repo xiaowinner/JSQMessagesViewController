@@ -215,4 +215,13 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
     _jsq_isObserving = NO;
 }
 
+- (void) didMoveToWindow {
+    [super didMoveToWindow];
+    if (@available(iOS 11.0, *)) {
+        if (self.window != nil) {
+            [[self bottomAnchor] constraintLessThanOrEqualToSystemSpacingBelowAnchor:self.window.safeAreaLayoutGuide.bottomAnchor multiplier:1.0].active = YES;
+        }
+    }
+}
+
 @end
