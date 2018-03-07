@@ -24,6 +24,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+
 /**
  *  The `JSQMessagesViewController` class is an abstract class that represents a view controller whose content consists of
  *  a `JSQMessagesCollectionView` and `JSQMessagesInputToolbar` and is specialized to display a messaging interface.
@@ -33,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
                                                          JSQMessagesCollectionViewDelegateFlowLayout,
                                                          UITextViewDelegate>
+
 
 /**
  *  Returns the collection view object managed by this view controller.
@@ -264,6 +267,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param animated Pass `YES` if you want to animate scrolling, `NO` otherwise.
  */
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
+
+
+- (NSString *)jsq_currentlyComposedMessageText;
 
 /**
  Call to super required.

@@ -360,19 +360,25 @@
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
-    [self.inputToolbar.contentView.textView resignFirstResponder];
+    
+
     if ([self.inputToolbar.contentView.textView.inputView isKindOfClass:[AGEmojiKeyboardView class]]) {
         
+        [self.inputToolbar.contentView.textView becomeFirstResponder];
         self.inputToolbar.contentView.textView.inputView = nil;
-
+        [self.inputToolbar.contentView.textView reloadInputViews];
+        
     }else {
+
         CGRect keyboardRect = CGRectMake(0, 0, self.view.frame.size.width, 216);
         AGEmojiKeyboardView *emojiKeyboardView = [[AGEmojiKeyboardView alloc] initWithFrame:keyboardRect
                                                                                  dataSource:self];
         emojiKeyboardView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         emojiKeyboardView.delegate = self;
         self.inputToolbar.contentView.textView.inputView = emojiKeyboardView;
+        [self.inputToolbar.contentView.textView reloadInputViews];
         [self.inputToolbar.contentView.textView becomeFirstResponder];
+
     }
 
 
@@ -386,11 +392,6 @@
 //    [sheet showFromToolbar:self.inputToolbar];
 }
 
-- (BOOL)resignFirstResponder {
-    
-    
-    return YES;
-}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -534,17 +535,17 @@
     /**
      *  iOS7-style sender name labels
      */
-    if ([message.senderId isEqualToString:self.senderId]) {
-        return nil;
-    }
-    
-    if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
-        if ([[previousMessage senderId] isEqualToString:message.senderId]) {
-            return nil;
-        }
-    }
-    
+//    if ([message.senderId isEqualToString:self.senderId]) {
+//        return nil;
+//    }
+//
+//    if (indexPath.item - 1 > 0) {
+//        JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
+//        if ([[previousMessage senderId] isEqualToString:message.senderId]) {
+//            return nil;
+//        }
+//    }
+//
     /**
      *  Don't specify attributes to use the defaults.
      */
@@ -554,6 +555,27 @@
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if ([text isEqualToString:@"\n"]) {
+        
+        if ([[self jsq_currentlyComposedMessageText] isEqualToString:@""]) {
+            return NO;
+        }
+        
+        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:[self.collectionView.dataSource senderId]
+                                                 senderDisplayName:[self.collectionView.dataSource senderDisplayName]
+                                                              date:[NSDate date]
+                                                              text:[self jsq_currentlyComposedMessageText]];
+        [self.demoData.messages addObject:message];
+        [self finishSendingMessageAnimated:YES];
+        return NO;
+    }
+    
+    return YES;
+    
 }
 
 #pragma mark - UICollectionView DataSource
@@ -592,7 +614,7 @@
             cell.textView.textColor = [UIColor blackColor];
         }
         else {
-            cell.textView.textColor = [UIColor whiteColor];
+            cell.textView.textColor = [UIColor blackColor];
         }
         
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
@@ -677,17 +699,17 @@
     /**
      *  iOS7-style sender name labels
      */
-    JSQMessage *currentMessage = [self.demoData.messages objectAtIndex:indexPath.item];
-    if ([[currentMessage senderId] isEqualToString:self.senderId]) {
-        return 0.0f;
-    }
-    
-    if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
-        if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
-            return 0.0f;
-        }
-    }
+//    JSQMessage *currentMessage = [self.demoData.messages objectAtIndex:indexPath.item];
+//    if ([[currentMessage senderId] isEqualToString:self.senderId]) {
+//        return 0.0f;
+//    }
+//
+//    if (indexPath.item - 1 > 0) {
+//        JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
+//        if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
+//            return 0.0f;
+//        }
+//    }
     
     return kJSQMessagesCollectionViewCellLabelHeightDefault;
 }

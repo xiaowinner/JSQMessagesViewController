@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Message bubble colors
 
++ (UIColor *)jsq_messageBubbleLightBlueColor;
+
++ (UIColor *)jsq_messageBubbleYellowColor;
+
 /**
  *  @return A color object containing HSB values similar to the iOS 7 messages app green bubble color.
  */

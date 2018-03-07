@@ -108,7 +108,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 }
 
 
-@interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate>
+@interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -559,6 +559,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
     cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
+//    cell.messageBubbleTopLabel.attributedText = [[NSAttributedString alloc] initWithString:@"我"];
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
 
     CGFloat bubbleTopLabelInset = (avatarImageDataSource != nil) ? 15.0f : 15.0f;
@@ -829,6 +830,21 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     [textView resignFirstResponder];
 }
+
+
+
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//    
+//    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+//        if (self.textViewReturnBlock) {
+//            self.textViewReturnBlock();
+//        }
+//        return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+//    }
+//    
+//    return YES;
+//    
+//}
 
 #pragma mark - Notifications
 

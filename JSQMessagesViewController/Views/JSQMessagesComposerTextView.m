@@ -38,11 +38,11 @@
 {
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
-    CGFloat cornerRadius = 6.0f;
+    CGFloat cornerRadius = 15.0f;
 
     self.backgroundColor = [UIColor whiteColor];
     self.layer.borderWidth = 0.5f;
-    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.layer.borderColor = [UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0].CGColor;
     self.layer.cornerRadius = cornerRadius;
 
     self.scrollIndicatorInsets = UIEdgeInsetsMake(cornerRadius, 0.0f, cornerRadius, 0.0f);
@@ -62,7 +62,7 @@
     self.dataDetectorTypes = UIDataDetectorTypeNone;
     self.keyboardAppearance = UIKeyboardAppearanceDefault;
     self.keyboardType = UIKeyboardTypeDefault;
-    self.returnKeyType = UIReturnKeyDefault;
+    self.returnKeyType = UIReturnKeySend;
 
     self.text = nil;
 

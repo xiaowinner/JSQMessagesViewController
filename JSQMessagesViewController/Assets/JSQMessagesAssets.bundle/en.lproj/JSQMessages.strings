@@ -26,7 +26,7 @@
 
 "send" = "Send";
 
-"new_message" = "New Message";
+"new_message" = "尝试提问";
 
 "text_message_accessibility_label" = "%@: %@";
 

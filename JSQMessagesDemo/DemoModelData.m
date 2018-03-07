@@ -51,7 +51,7 @@
          */
         JSQMessagesAvatarImageFactory *avatarFactory = [[JSQMessagesAvatarImageFactory alloc] initWithDiameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        JSQMessagesAvatarImage *jsqImage = [avatarFactory avatarImageWithUserInitials:@"JSQ"
+        JSQMessagesAvatarImage *jsqImage = [avatarFactory avatarImageWithUserInitials:@"我"
                                                                       backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
                                                                             textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                                                                                  font:[UIFont systemFontOfSize:14.0f]];
@@ -82,8 +82,9 @@
          */
         JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
         
-        self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-        self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+        self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleYellowColor]];
+        self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightBlueColor]];
+        
     }
     
     return self;
