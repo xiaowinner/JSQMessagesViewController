@@ -157,7 +157,8 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     self.inputToolbar.delegate = self;
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
-    [self.inputToolbar.contentView setLeftBarButtonItemWidth:0];
+//    [self.inputToolbar.contentView setLeftBarButtonItemWidth:0];
+    [self.inputToolbar.contentView setRightBarButtonItemWidth:0];
     self.inputToolbar.contentView.textView.delegate = self;
     self.inputToolbar.contentView.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     [self.inputToolbar removeFromSuperview];
@@ -733,6 +734,21 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
          touchLocation:(CGPoint)touchLocation { }
 
 #pragma mark - Input toolbar delegate
+
+// MARK: 附加功能 发图等等。。。
+//- (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
+//{
+//    if (toolbar.sendButtonLocation == JSQMessagesInputSendButtonLocationLeft) {
+//        [self didPressSendButton:sender
+//                 withMessageText:[self jsq_currentlyComposedMessageText]
+//                        senderId:[self.collectionView.dataSource senderId]
+//               senderDisplayName:[self.collectionView.dataSource senderDisplayName]
+//                            date:[NSDate date]];
+//    }
+//    else {
+//        [self didPressAccessoryButton:sender];
+//    }
+//}
 
 - (void)messagesInputToolbar:(JSQMessagesInputToolbar *)toolbar didPressLeftBarButton:(UIButton *)sender
 {

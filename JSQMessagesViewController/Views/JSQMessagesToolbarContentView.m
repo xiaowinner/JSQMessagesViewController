@@ -34,7 +34,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightBarButtonContainerViewWidthConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftHorizontalSpacingConstraint;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftHorizontalSpacingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightHorizontalSpacingConstraint;
 
 @end
@@ -59,7 +59,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
-    self.leftHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
+//    self.leftHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
     self.rightHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
 
     self.backgroundColor = [UIColor clearColor];
@@ -82,7 +82,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 
     if (!leftBarButtonItem) {
         _leftBarButtonItem = nil;
-        self.leftHorizontalSpacingConstraint.constant = 0.0f;
+//        self.leftHorizontalSpacingConstraint.constant = 0.0f;
         self.leftBarButtonItemWidth = 0.0f;
         self.leftBarButtonContainerView.hidden = YES;
         return;
@@ -93,7 +93,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     }
 
     self.leftBarButtonContainerView.hidden = NO;
-    self.leftHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
+//    self.leftHorizontalSpacingConstraint.constant = kJSQMessagesToolbarContentViewHorizontalSpacingDefault;
     self.leftBarButtonItemWidth = CGRectGetWidth(leftBarButtonItem.frame);
 
     [leftBarButtonItem setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -156,7 +156,7 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
 
 - (void)setLeftContentPadding:(CGFloat)leftContentPadding
 {
-    self.leftHorizontalSpacingConstraint.constant = leftContentPadding;
+//    self.leftHorizontalSpacingConstraint.constant = leftContentPadding;
     [self setNeedsUpdateConstraints];
 }
 
@@ -177,10 +177,10 @@ const CGFloat kJSQMessagesToolbarContentViewHorizontalSpacingDefault = 8.0f;
     return self.rightHorizontalSpacingConstraint.constant;
 }
 
-- (CGFloat)leftContentPadding
-{
-    return self.leftHorizontalSpacingConstraint.constant;
-}
+//- (CGFloat)leftContentPadding
+//{
+//    return self.leftHorizontalSpacingConstraint.constant;
+//}
 
 #pragma mark - UIView overrides
 
