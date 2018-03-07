@@ -18,8 +18,9 @@
 
 #import "DemoMessagesViewController.h"
 #import "JSQMessagesViewAccessoryButtonDelegate.h"
+#import "AGEmojiKeyBoardView.h"
 
-@interface DemoMessagesViewController () <JSQMessagesViewAccessoryButtonDelegate>
+@interface DemoMessagesViewController () <JSQMessagesViewAccessoryButtonDelegate, AGEmojiKeyboardViewDelegate, AGEmojiKeyboardViewDataSource>
 @end
 
 @implementation DemoMessagesViewController
@@ -360,14 +361,35 @@
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     [self.inputToolbar.contentView.textView resignFirstResponder];
+    if ([self.inputToolbar.contentView.textView.inputView isKindOfClass:[AGEmojiKeyboardView class]]) {
+        
+        self.inputToolbar.contentView.textView.inputView = nil;
 
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Media messages", nil)
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:NSLocalizedString(@"Send photo", nil), NSLocalizedString(@"Send location", nil), NSLocalizedString(@"Send video", nil), NSLocalizedString(@"Send video thumbnail", nil), NSLocalizedString(@"Send audio", nil), nil];
+    }else {
+        CGRect keyboardRect = CGRectMake(0, 0, self.view.frame.size.width, 216);
+        AGEmojiKeyboardView *emojiKeyboardView = [[AGEmojiKeyboardView alloc] initWithFrame:keyboardRect
+                                                                                 dataSource:self];
+        emojiKeyboardView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        emojiKeyboardView.delegate = self;
+        self.inputToolbar.contentView.textView.inputView = emojiKeyboardView;
+        [self.inputToolbar.contentView.textView becomeFirstResponder];
+    }
+
+
     
-    [sheet showFromToolbar:self.inputToolbar];
+//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Media messages", nil)
+//                                                       delegate:self
+//                                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+//                                         destructiveButtonTitle:nil
+//                                              otherButtonTitles:NSLocalizedString(@"Send photo", nil), NSLocalizedString(@"Send location", nil), NSLocalizedString(@"Send video", nil), NSLocalizedString(@"Send video thumbnail", nil), NSLocalizedString(@"Send audio", nil), nil];
+//
+//    [sheet showFromToolbar:self.inputToolbar];
+}
+
+- (BOOL)resignFirstResponder {
+    
+    
+    return YES;
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -722,6 +744,61 @@
 - (void)messageView:(JSQMessagesCollectionView *)view didTapAccessoryButtonAtIndexPath:(NSIndexPath *)path
 {
     NSLog(@"Tapped accessory button!");
+}
+
+
+- (void)emojiKeyBoardView:(AGEmojiKeyboardView *)emojiKeyBoardView didUseEmoji:(NSString *)emoji {
+    self.inputToolbar.contentView.textView.text = [self.inputToolbar.contentView.textView.text stringByAppendingString:emoji];
+}
+
+- (void)emojiKeyBoardViewDidPressBackSpace:(AGEmojiKeyboardView *)emojiKeyBoardView {
+    
+}
+
+- (UIColor *)randomColor {
+    return [UIColor colorWithRed:drand48()
+                           green:drand48()
+                            blue:drand48()
+                           alpha:drand48()];
+}
+
+- (UIImage *)randomImage {
+    CGSize size = CGSizeMake(30, 10);
+    UIGraphicsBeginImageContextWithOptions(size , NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIColor *fillColor = [self randomColor];
+    CGContextSetFillColorWithColor(context, [fillColor CGColor]);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    CGContextFillRect(context, rect);
+    
+    fillColor = [self randomColor];
+    CGContextSetFillColorWithColor(context, [fillColor CGColor]);
+    CGFloat xxx = 3;
+    rect = CGRectMake(xxx, xxx, size.width - 2 * xxx, size.height - 2 * xxx);
+    CGContextFillRect(context, rect);
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
+- (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
+}
+
+- (UIImage *)emojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView imageForNonSelectedCategory:(AGEmojiKeyboardViewCategoryImage)category {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
+}
+
+- (UIImage *)backSpaceButtonImageForEmojiKeyboardView:(AGEmojiKeyboardView *)emojiKeyboardView {
+    UIImage *img = [self randomImage];
+    [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return img;
 }
 
 @end
