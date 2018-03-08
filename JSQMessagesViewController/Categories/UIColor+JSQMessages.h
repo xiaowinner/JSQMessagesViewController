@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Message bubble colors
 
++ (UIColor *)jsq_messageTopLabelGrayColor;
+
 + (UIColor *)jsq_messageBubbleLightBlueColor;
 
 + (UIColor *)jsq_messageBubbleYellowColor;

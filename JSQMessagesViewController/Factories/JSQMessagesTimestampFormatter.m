@@ -17,6 +17,7 @@
 //
 
 #import "JSQMessagesTimestampFormatter.h"
+#import "UIColor+JSQMessages.h"
 
 @interface JSQMessagesTimestampFormatter ()
 
@@ -50,7 +51,7 @@
         [_dateFormatter setLocale:[NSLocale currentLocale]];
         [_dateFormatter setDoesRelativeDateFormatting:YES];
         
-        UIColor *color = [UIColor lightGrayColor];
+        UIColor *color = [UIColor jsq_messageTopLabelGrayColor];
         
         NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         paragraphStyle.alignment = NSTextAlignmentCenter;

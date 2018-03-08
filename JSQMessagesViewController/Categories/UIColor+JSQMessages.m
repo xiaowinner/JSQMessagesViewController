@@ -22,6 +22,16 @@
 
 #pragma mark - Message bubble colors
 
+
++ (UIColor *)jsq_messageTopLabelGrayColor
+{
+    return [UIColor colorWithRed:135.0f / 255.0f
+                           green:135.0f / 255.0f
+                            blue:135.0f / 255.0f
+                           alpha:1.0f];
+}
+
+
 + (UIColor *)jsq_messageBubbleLightBlueColor
 {
     return [UIColor colorWithRed:242.0f / 255.0f

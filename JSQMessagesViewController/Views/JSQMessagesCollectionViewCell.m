@@ -21,6 +21,7 @@
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
+#import "UIColor+JSQMessages.h"
 
 #import "UIView+JSQMessages.h"
 #import "UIImage+JSQMessages.h"
@@ -31,6 +32,9 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 @interface JSQMessagesCollectionViewCell ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *cellTopBackgroundView;
+
+@property (weak, nonatomic) IBOutlet UIView *cellTopView;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellTopLabel;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *messageBubbleTopLabel;
 @property (weak, nonatomic) IBOutlet JSQMessagesLabel *cellBottomLabel;
@@ -50,6 +54,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomVerticalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewMarginHorizontalSpaceConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightConstraint;
@@ -120,7 +126,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     UIFont *topLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
     self.cellTopLabel.font = topLabelFont;
-    self.cellTopLabel.textColor = [UIColor lightGrayColor];
+    self.cellTopLabel.textColor = [UIColor jsq_messageTopLabelGrayColor];
     self.cellTopLabel.numberOfLines = 0;
     
     UIFont *messageBubbleTopLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
@@ -133,10 +139,14 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.cellBottomLabel.font = bottomLabelFont;
     self.cellBottomLabel.textColor = [UIColor lightGrayColor];
     self.cellBottomLabel.numberOfLines = 0;
+    
+    self.cellTopBackgroundView.layer.cornerRadius = 4;
+    self.cellTopBackgroundView.layer.masksToBounds = YES;
 
     [self configureAccessoryButton];
 
     self.cellTopLabelHeightConstraint.constant = topLabelFont.pointSize;
+    self.cellTopViewHeightConstraint.constant = topLabelFont.pointSize;
     self.messageBubbleTopLabelHeightConstraint.constant = messageBubbleTopLabelFont.pointSize;
     self.cellBottomLabelHeightConstraint.constant = bottomLabelFont.pointSize;
     
@@ -216,6 +226,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     [self jsq_updateConstraint:self.cellTopLabelHeightConstraint
                   withConstant:customAttributes.cellTopLabelHeight];
+    
+    [self jsq_updateConstraint:self.cellTopViewHeightConstraint withConstant:customAttributes.cellTopLabelHeight];
 
     [self jsq_updateConstraint:self.messageBubbleTopLabelHeightConstraint
                   withConstant:customAttributes.messageBubbleTopLabelHeight];
