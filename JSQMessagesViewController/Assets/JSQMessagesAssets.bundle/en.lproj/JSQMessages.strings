@@ -22,7 +22,7 @@
 //  https://github.com/jessesquires/JSQMessagesViewController/issues/237
 //  ********************************
 
-"load_earlier_messages" = "Load Earlier Messages";
+"load_earlier_messages" = "加载之前的消息";
 
 "send" = "Send";
 
