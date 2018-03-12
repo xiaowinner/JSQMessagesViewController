@@ -96,6 +96,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface JSQMessagesCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *userIconImageView;
+
 /**
  *  The object that acts as the delegate for the cell.
  */
@@ -180,6 +182,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  This gesture handles the tap event for the avatarImageView and notifies the cell's delegate.
  */
 @property (weak, nonatomic, readonly, nullable) UITapGestureRecognizer *tapGestureRecognizer;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelWidthConstraint;
 
 #pragma mark - Class methods
 

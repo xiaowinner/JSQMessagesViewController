@@ -55,6 +55,7 @@
     [self setNeedsDisplay];
 }
 
+
 #pragma mark - Drawing
 
 - (void)drawTextInRect:(CGRect)rect

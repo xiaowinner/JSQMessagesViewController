@@ -137,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @see JSQMessagesCollectionViewCell.
  */
-- (nullable NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
+- (nullable NSString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Asks the data source for the text to display in the `cellBottomLabel` for the the specified

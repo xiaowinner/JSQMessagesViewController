@@ -32,6 +32,7 @@
 
 #import "NSString+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
+#import "UILabel+JSQMessages.h"
 
 #import <objc/runtime.h>
 
@@ -476,7 +477,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     return nil;
 }
 
-- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
 }
@@ -558,8 +559,15 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     }
 
     cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
-    cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
-//    cell.messageBubbleTopLabel.attributedText = [[NSAttributedString alloc] initWithString:@"我"];
+    
+    NSString *nameString = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
+    
+    cell.messageBubbleTopLabel.text = nameString;
+    
+    CGFloat width = [nameString jsq_calculateStringWidth:cell.messageBubbleTopLabel.font];
+    
+    cell.messageBubbleTopLabelWidthConstraint.constant = width;
+    
     cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
 
     CGFloat bubbleTopLabelInset = (avatarImageDataSource != nil) ? 15.0f : 15.0f;

@@ -25,4 +25,11 @@
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
+- (CGFloat)jsq_calculateStringWidth:(UIFont *)font {
+    NSDictionary *dic = @{NSFontAttributeName:font};  //指定字号
+    CGRect rect = [self boundingRectWithSize:CGSizeMake(0, 20)/*计算宽度时要确定高度*/ options:NSStringDrawingUsesLineFragmentOrigin |
+                   NSStringDrawingUsesFontLeading attributes:dic context:nil];
+    return rect.size.width + 30;
+}
+
 @end

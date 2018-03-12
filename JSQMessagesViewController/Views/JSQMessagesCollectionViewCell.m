@@ -64,6 +64,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
 
+
+
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
 
 @property (assign, nonatomic) CGSize avatarViewSize;
@@ -123,15 +125,15 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.backgroundColor = [UIColor whiteColor];
     self.avatarViewSize = CGSizeZero;
     
-    UIFont *topLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    UIFont *topLabelFont = [UIFont fontWithName:@"SFUIText-Regular" size:14];
     self.cellTopLabel.textAlignment = NSTextAlignmentCenter;
     self.cellTopLabel.font = topLabelFont;
     self.cellTopLabel.textColor = [UIColor jsq_messageTopLabelGrayColor];
     self.cellTopLabel.numberOfLines = 0;
     
-    UIFont *messageBubbleTopLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    UIFont *messageBubbleTopLabelFont = [UIFont fontWithName:@"PingFangSC-Medium" size:15];
     self.messageBubbleTopLabel.font = messageBubbleTopLabelFont;
-    self.messageBubbleTopLabel.textColor = [UIColor lightGrayColor];
+    self.messageBubbleTopLabel.textColor = [UIColor blackColor];
     [self.messageBubbleTopLabel setTextAlignment:NSTextAlignmentLeft];
     self.messageBubbleTopLabel.numberOfLines = 0;
     
@@ -148,6 +150,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.cellTopLabelHeightConstraint.constant = topLabelFont.pointSize;
     self.cellTopViewHeightConstraint.constant = topLabelFont.pointSize;
     self.messageBubbleTopLabelHeightConstraint.constant = messageBubbleTopLabelFont.pointSize;
+    
     self.cellBottomLabelHeightConstraint.constant = bottomLabelFont.pointSize;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jsq_handleTapGesture:)];

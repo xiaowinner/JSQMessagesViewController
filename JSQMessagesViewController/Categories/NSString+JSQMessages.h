@@ -17,6 +17,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return A copy of the receiver with all leading and trailing whitespace removed.
  */
 - (NSString *)jsq_stringByTrimingWhitespace;
+
+- (CGFloat)jsq_calculateStringWidth:(UIFont *)font;
 
 @end
 
