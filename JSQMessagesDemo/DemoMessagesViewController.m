@@ -95,6 +95,7 @@
      *
      *  self.inputToolbar.maximumHeight = 150;
      */
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -557,26 +558,26 @@
     return nil;
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    if ([text isEqualToString:@"\n"]) {
-        
-        if ([[self jsq_currentlyComposedMessageText] isEqualToString:@""]) {
-            return NO;
-        }
-        
-        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:[self.collectionView.dataSource senderId]
-                                                 senderDisplayName:[self.collectionView.dataSource senderDisplayName]
-                                                              date:[NSDate date]
-                                                              text:[self jsq_currentlyComposedMessageText]];
-        [self.demoData.messages addObject:message];
-        [self finishSendingMessageAnimated:YES];
-        return NO;
-    }
-    
-    return YES;
-    
-}
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//
+//    if ([text isEqualToString:@"\n"]) {
+//
+//        if ([[self jsq_currentlyComposedMessageText] isEqualToString:@""]) {
+//            return NO;
+//        }
+//
+//        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:[self.collectionView.dataSource senderId]
+//                                                 senderDisplayName:[self.collectionView.dataSource senderDisplayName]
+//                                                              date:[NSDate date]
+//                                                              text:[self jsq_currentlyComposedMessageText]];
+//        [self.demoData.messages addObject:message];
+//        [self finishSendingMessageAnimated:YES];
+//        return NO;
+//    }
+//
+//    return YES;
+//
+//}
 
 #pragma mark - UICollectionView DataSource
 

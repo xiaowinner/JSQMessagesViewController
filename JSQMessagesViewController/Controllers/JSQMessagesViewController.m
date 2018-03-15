@@ -151,15 +151,15 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     self.view.backgroundColor = [UIColor whiteColor];
 
     self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
-
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-
+    
     self.inputToolbar.delegate = self;
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
-//    [self.inputToolbar.contentView setLeftBarButtonItemWidth:0];
-    [self.inputToolbar.contentView setRightBarButtonItemWidth:0];
+    [self.inputToolbar.contentView setLeftBarButtonItemWidth:0];
+//    [self.inputToolbar.contentView setRightBarButtonItemWidth:0];
+    
     self.inputToolbar.contentView.textView.delegate = self;
     self.inputToolbar.contentView.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     [self.inputToolbar removeFromSuperview];
@@ -180,8 +180,10 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     self.showLoadEarlierMessagesHeader = NO;
 
     self.additionalContentInset = UIEdgeInsetsZero;
+    
 
     [self jsq_updateCollectionViewInsets];
+
 }
 
 - (void)dealloc
@@ -243,6 +245,8 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     [super viewWillAppear:animated];
     if (!self.inputToolbar.contentView.textView.hasText) {
         self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
+    }else {
+        
     }
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
