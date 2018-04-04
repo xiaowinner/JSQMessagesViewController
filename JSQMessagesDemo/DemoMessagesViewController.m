@@ -96,6 +96,8 @@
      *  self.inputToolbar.maximumHeight = 150;
      */
 
+    self.inputToolbar.maximumHeight = 250;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

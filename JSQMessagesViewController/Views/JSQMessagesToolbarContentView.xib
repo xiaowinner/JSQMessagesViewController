@@ -28,7 +28,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="7g1-OD-zlc"/>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="dck-S7-jK5"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="dck-S7-jK5"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
